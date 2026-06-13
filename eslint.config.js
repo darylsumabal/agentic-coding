@@ -70,20 +70,20 @@ export default [
                     fixStyle: 'separate-type-imports',
                 },
             ],
-            'import/order': [
-                'error',
-                {
-                    groups: [
-                        'builtin',
-                        'external',
-                        'internal',
-                        'parent',
-                        'sibling',
-                        'index',
-                    ],
-                    alphabetize: { order: 'asc', caseInsensitive: true },
-                },
-            ],
+            // 'import/order': [
+            //     'error',
+            //     {
+            //         groups: [
+            //             'builtin',
+            //             'external',
+            //             'internal',
+            //             'parent',
+            //             'sibling',
+            //             'index',
+            //         ],
+            //         alphabetize: { order: 'asc', caseInsensitive: true },
+            //     },
+            // ],
             'import/consistent-type-specifier-style': [
                 'error',
                 'prefer-top-level',

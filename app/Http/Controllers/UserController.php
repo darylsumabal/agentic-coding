@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\User\CreateUserAction;
+use App\Actions\User\DeleteUserAction;
+use App\Actions\User\PaginateUserAction;
+use App\Actions\User\UpdateUserAction;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -14,11 +18,12 @@ use Inertia\Response;
 class UserController extends Controller
 {
 
-    public function __construct(private readonly UserService $users) {}
+    // public function __construct(private readonly UserService $users) {}
 
-    public function index(Request $request): Response
+    public function index(Request $request, PaginateUserAction $paginateUserAction): Response
     {
-        $users = $this->users->paginate($request->all());
+        // $users = $this->users->paginate($request->all());
+        $users = $paginateUserAction->execute($request->all());
 
         return Inertia::render('users/Index', [
             'users' => UserResource::collection($users),
@@ -30,9 +35,10 @@ class UserController extends Controller
         return Inertia::render('users/Create');
     }
 
-    public function store(UserRequest $request): RedirectResponse
+    public function store(UserRequest $request, CreateUserAction $createUserAction): RedirectResponse
     {
-        $this->users->create($request->validated());
+        // $this->users->create($request->validated());
+        $createUserAction->execute($request->validated());
 
         return redirect()->route('users.index');
     }
@@ -44,17 +50,19 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(UserRequest $request, User $user): RedirectResponse
+    public function update(UserRequest $request, User $user, UpdateUserAction $updateUserAction): RedirectResponse
     {
 
-        $this->users->update($user, $request->validated());
+        // $this->users->update($user, $request->validated());
+        $updateUserAction->execute($user, $request->validated());
 
         return redirect()->route('users.index');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(User $user, DeleteUserAction $deleteUserAction): RedirectResponse
     {
-        $this->users->delete($user);
+        // $this->users->delete($user);
+        $deleteUserAction->execute($user);
 
         return redirect()->route('users.index');
     }
