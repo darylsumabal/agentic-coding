@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "filament-pro": {
+      "source": "marcelorodrigo/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/filament-pro/SKILL.md",
+      "computedHash": "de378b8a7a213c8ad393e2b5c36155699f35232d0bcb05642c2b6877a53f5005"
+    },
+    "laravel-specialist": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/laravel-specialist/SKILL.md",
+      "computedHash": "805be17bd59f759e2f2f2dcbd6bd205ca6678420a87b21da1c16e0793093615c"
+    }
+  }
+}
