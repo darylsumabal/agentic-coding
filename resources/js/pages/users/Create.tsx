@@ -1,4 +1,4 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Form, Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,19 +8,19 @@ import InputError from '@/components/input-error';
 import { index as usersIndex, store } from '@/routes/users';
 
 export default function UsersCreate() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, processing, errors, reset, submit } = useForm({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
-        post(store().url, {
-            onSuccess: () => {
-                reset();
-            },
+
+        submit('post', store().url, {
+            onSuccess: () => reset(),
+            onError: (e) => console.log(e),
         });
     };
 
@@ -40,13 +40,22 @@ export default function UsersCreate() {
                         <CardTitle>Create New User</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <Form
+                            method="POST"
+                            action={store().url}
+                            onSuccess={() => reset()}
+                            onError={(e) => console.log(e)}
+                            className="space-y-6"
+                        >
                             <div className="grid gap-2">
                                 <Label htmlFor="name">Name</Label>
                                 <Input
-                                    id="name"
-                                    value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
+                                    // id="name"
+                                    // value={data.name}
+                                    // onChange={(e) =>
+                                    //     setData('name', e.target.value)
+                                    // }
+                                    name="name"
                                     placeholder="Enter full name"
                                     required
                                 />
@@ -56,10 +65,13 @@ export default function UsersCreate() {
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
                                 <Input
-                                    id="email"
-                                    type="email"
-                                    value={data.email}
-                                    onChange={(e) => setData('email', e.target.value)}
+                                    // id="email"
+                                    // type="email"
+                                    // value={data.email}
+                                    // onChange={(e) =>
+                                    //     setData('email', e.target.value)
+                                    // }
+                                    name="email"
                                     placeholder="Enter email address"
                                     required
                                 />
@@ -69,10 +81,13 @@ export default function UsersCreate() {
                             <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
                                 <Input
-                                    id="password"
-                                    type="password"
-                                    value={data.password}
-                                    onChange={(e) => setData('password', e.target.value)}
+                                    // id="password"
+                                    // type="password"
+                                    // value={data.password}
+                                    // onChange={(e) =>
+                                    //     setData('password', e.target.value)
+                                    // }
+                                    name="password"
                                     placeholder="Enter password"
                                     required
                                     minLength={8}
@@ -81,16 +96,26 @@ export default function UsersCreate() {
                             </div>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="password_confirmation">Confirm Password</Label>
+                                <Label htmlFor="password_confirmation">
+                                    Confirm Password
+                                </Label>
                                 <Input
-                                    id="password_confirmation"
-                                    type="password"
-                                    value={data.password_confirmation}
-                                    onChange={(e) => setData('password_confirmation', e.target.value)}
+                                    // id="password_confirmation"
+                                    // type="password"
+                                    // value={data.password_confirmation}
+                                    // onChange={(e) =>
+                                    //     setData(
+                                    //         'password_confirmation',
+                                    //         e.target.value,
+                                    //     )
+                                    // }
+                                    name="password_confirmation"
                                     placeholder="Confirm password"
                                     required
                                 />
-                                <InputError message={errors.password_confirmation} />
+                                <InputError
+                                    message={errors.password_confirmation}
+                                />
                             </div>
 
                             <div className="flex items-center gap-4">
@@ -98,7 +123,7 @@ export default function UsersCreate() {
                                     {processing ? 'Creating...' : 'Create User'}
                                 </Button>
                             </div>
-                        </form>
+                        </Form>
                     </CardContent>
                 </Card>
             </div>

@@ -10,6 +10,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -20,14 +21,17 @@ class UserController extends Controller
 
     // public function __construct(private readonly UserService $users) {}
 
-    public function index(Request $request, PaginateUserAction $paginateUserAction): Response
+    public function index(Request $request, PaginateUserAction $paginateUserAction)
     {
         // $users = $this->users->paginate($request->all());
-        $users = $paginateUserAction->execute($request->all());
+        // $users = $paginateUserAction->execute($request->all());
 
-        return Inertia::render('users/Index', [
-            'users' => UserResource::collection($users),
-        ]);
+        // return Inertia::render('users/Index', [
+        //     'users' => UserResource::collection($users),
+        // ]);
+
+        // return UserResource::collection(User::all());
+        return User::all()->toResourceCollection();
     }
 
     public function create(): Response
