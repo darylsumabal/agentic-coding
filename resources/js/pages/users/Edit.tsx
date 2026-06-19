@@ -60,7 +60,6 @@ export default function UsersEdit() {
                                         onChange={(e) =>
                                             setData('name', e.target.value)
                                         }
-                                        defaultValue={data.name}
                                         placeholder="Enter full name"
                                         required
                                     />
@@ -77,7 +76,6 @@ export default function UsersEdit() {
                                         onChange={(e) =>
                                             setData('email', e.target.value)
                                         }
-                                        defaultValue={user.email}
                                         placeholder="Enter email address"
                                         required
                                     />

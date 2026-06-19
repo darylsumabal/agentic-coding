@@ -7,7 +7,10 @@ use App\Actions\User\DeleteUserAction;
 use App\Actions\User\PaginateUserAction;
 use App\Actions\User\UpdateUserAction;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\UserResource;
+use App\Models\Product;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
@@ -30,8 +33,13 @@ class UserController extends Controller
             'users' => UserResource::collection($users),
         ]);
 
-        // return UserResource::collection(User::all());
+        // return ProductResource::collection(Product::all());
+        // return Product::all()->toResourceCollection();
+        // return new ProductCollection(Product::all());
         // return User::all()->toResourceCollection();
+        // return [
+        //     'test' => ProductResource::collection(Product::all())
+        // ];
     }
 
     public function create(): Response
