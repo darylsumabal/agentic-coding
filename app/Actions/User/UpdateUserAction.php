@@ -16,6 +16,10 @@ class UpdateUserAction
 
     public function execute(User $user, array $attributes)
     {
+        if (empty($attributes['password'])) {
+            unset($attributes['password']);
+        }
+
         return $user->update($attributes);
     }
 }
