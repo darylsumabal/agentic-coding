@@ -24,14 +24,14 @@ class UserController extends Controller
     public function index(Request $request, PaginateUserAction $paginateUserAction)
     {
         // $users = $this->users->paginate($request->all());
-        // $users = $paginateUserAction->execute($request->all());
+        $users = $paginateUserAction->execute($request->all());
 
-        // return Inertia::render('users/Index', [
-        //     'users' => UserResource::collection($users),
-        // ]);
+        return Inertia::render('users/Index', [
+            'users' => UserResource::collection($users),
+        ]);
 
         // return UserResource::collection(User::all());
-        return User::all()->toResourceCollection();
+        // return User::all()->toResourceCollection();
     }
 
     public function create(): Response

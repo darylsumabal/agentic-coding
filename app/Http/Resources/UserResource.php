@@ -12,6 +12,9 @@ class UserResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array<string, mixed>
      */
+
+    public static $wrap = '';
+
     public function toArray($request)
     {
         return [
