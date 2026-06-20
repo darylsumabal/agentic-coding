@@ -21,6 +21,13 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'email_verified_at' => $this->email_verified_at?->toDateTimeString(),
+            'pivot' => $this->whenPivotLoaded('product_user', function () {
+                return [
+                    'product_id' => $this->pivot->product_id,
+                    'user_id' => $this->pivot->user_id,
+                    'quantity' => $this->pivot->quantity
+                ];
+            })
         ];
     }
 }
