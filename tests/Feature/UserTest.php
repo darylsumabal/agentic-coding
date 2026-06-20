@@ -4,6 +4,7 @@ use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertDatabaseMissing;
 use function Pest\Laravel\withoutExceptionHandling;
 
 test('index users', function () {
@@ -53,6 +54,13 @@ test('update user', function () {
     ]);
 });
 
-test('delete user',function(){
+test('delete user', function () {
+    withoutExceptionHandling();
+    $user = User::factory()->create();
 
+    actingAs($user)->delete(route('users.destroy', $user));
+
+    assertDatabaseMissing('users', [
+        'id'    => $user->id,
+    ]);
 });
