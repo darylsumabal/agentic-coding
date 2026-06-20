@@ -84,4 +84,9 @@ class User extends Authenticatable implements PasskeyUser, HasTenants
     {
         return $this->teams()->whereKey($tenant)->exists();
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

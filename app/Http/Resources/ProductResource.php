@@ -19,6 +19,8 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
+            'slug' => $this->slug,
+            'users' => UserResource::collection($this->whenLoaded('users'))
         ];
     }
 }

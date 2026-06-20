@@ -37,8 +37,8 @@ test('update user', function () {
     $user = User::factory()->create();
 
     $data = [
-        'name' => 'John Does updated',
-        'email' => 'joshn@example.com',
+        'name' => 'John Does updatedasd',
+        'email' => 'ssdhn@aexample.com',
         'type' => 'admin',
         'password' => 'password',
         'password_confirmation' => 'password',
@@ -48,7 +48,11 @@ test('update user', function () {
 
     assertDatabaseHas('users', [
         'id'    => $user->id,
-        'name' => 'John Does updated',
-        'email' => 'joshn@example.com',
+        'name' => 'John Does updatedasd',
+        'email' => 'ssdhn@aexample.com',
     ]);
+});
+
+test('delete user',function(){
+
 });

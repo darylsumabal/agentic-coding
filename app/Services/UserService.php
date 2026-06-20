@@ -31,6 +31,11 @@ class UserService
 
     public function update(User $user, array $attributes): bool
     {
+
+        if (isset($attributes['email'])) {
+            unset($attributes['email']);
+        }
+
         if (empty($attributes['password'])) {
             unset($attributes['password']);
         } else {

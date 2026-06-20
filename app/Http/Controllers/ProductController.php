@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Product\CreateProductAction;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+
+        return ProductResource::collection(Product::with('users')->get());
     }
 
     /**
